@@ -1,0 +1,23 @@
+.device-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.device-card {
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-card-subtitle {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+}

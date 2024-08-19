@@ -1,0 +1,13 @@
+<div class="device-container">
+    <mat-card *ngFor="let device of dataSource" class="device-card">
+      <mat-card-header>
+        <mat-card-title>{{ device.name }}</mat-card-title>
+        <mat-card-subtitle [ngStyle]="{ 'background-color': getStatusColor(device.status) }">
+          {{ device.status }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Last Updated: {{ device.lastUpdated | date:'short' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>

@@ -1,0 +1,31 @@
+.expanded-card-container {
+  margin-top: 16px;
+}
+
+.expanded-card {
+  padding: 16px;
+}
+
+.device-inner-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.inner-card {
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-card-subtitle {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+}
