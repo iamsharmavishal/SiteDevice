@@ -1,0 +1,24 @@
+<!-- src/app/components/device-grid/device-grid.component.html -->
+
+<div class="device-grid">
+  <mat-card *ngFor="let cd of cardList" class="device-card">
+    <mat-card-header class="card-header">
+      <div class="header-content">
+        <div class="header-title">{{ cd.title }}</div>
+        <div class="header-subtitle">Last updated: {{ cd.lastUpdated }}</div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="card-details">
+        <div [ngClass]="getGridClass(cd.details)" class="details-grid">
+          <div *ngFor="let detail of cd.details" class="details-item" >
+            <div class="details-key">{{ detail['key'] }}:</div>
+            <div class="details-value" [ngClass]="getStatusClass(detail.key, detail.value)">{{ detail['value'] }}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+ <!-- Include the expanded device grid component here -->
+ <app-device-grid-expanded></app-device-grid-expanded>

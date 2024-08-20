@@ -1,0 +1,156 @@
+<!-- src/app/components/site-detail/site-detail.component.html -->
+<div class="site-detail-container">
+  <!-- Header Row -->
+  <div class="header-row">
+    <h2 class="home-header">Home</h2>
+  </div>
+
+  <!-- Site Info Card -->
+  <mat-card class="site-info-card">
+    <div class="site-info-left">
+      <h3 class="site-number">Site Number: {{ siteInfo.number }}</h3>
+      <p class="site-details">{{ siteInfo.details }}</p>
+    </div>
+    <div class="site-info-right">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="date-dropdown">
+        <mat-label>Select Date</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let option of dateOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <!-- Main Content Container -->
+  <div class="main-content-container">
+    <!-- Column 1: EOD Start Date and Transaction Cards -->
+    <div class="column-1">
+      <div class="eod-start-date-card">
+        <div class="eod-header">EOD Start Date</div>
+        <!-- EOD Start Date Content -->
+      </div>
+
+      <!-- Transaction Cards -->
+      <mat-card class="transaction-cards-card">
+        <div class="transaction-cards">
+          <mat-card class="transaction-card m-b-10">
+            <div class="card-content">
+              <p class="transaction-label">{{ outdoorTransaction.label }}</p>
+              <p class="transaction-value">{{ outdoorTransaction.value | currency }}</p>
+            </div>
+            <div class="thumb-icon">
+              <mat-icon>thumb_up</mat-icon>
+            </div>
+          </mat-card>
+
+          <mat-card class="transaction-card">
+            <div class="card-content">
+              <p class="transaction-label">{{ indoorTransaction.label }}</p>
+              <p class="transaction-value">{{ indoorTransaction.value | currency }}</p>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+
+    <!-- Column 2: Price Status Table -->
+    <mat-card class="price-status-card">
+      <mat-card-header>
+        <mat-card-title>Price Status</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-table [dataSource]="priceStatusData">
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="pole">
+            <mat-header-cell *matHeaderCellDef> Pole </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.pole }} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.price | currency }} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Column 3: Existing Card Containers -->
+    <div class="existing-cards">
+      <mat-card *ngFor="let card of cardList" class="device-card">
+        <mat-card-header>
+          <div class="header-content">
+            <div class="header-title">{{ card.title }}</div>
+            <div class="header-subtitle">Last updated: {{ card.lastUpdated }}</div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <div [ngClass]="getGridClass(card.details)" class="details-grid">
+            <div *ngFor="let detail of card.details" class="details-item">
+              <div class="details-key">{{ detail.key }}:</div>
+              <div class="details-value" [ngClass]="getStatusClass(detail.key, detail.value)">{{ detail.value }}</div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <!-- pump status Container HTML -->
+  <div class="dynamic-cards-container">
+    <mat-card *ngFor="let card of dynamicPumpStatusCards" [ngClass]="getCardBackgroundColor(card.printerStatus)">
+      <div class="card-content">
+        <div class="card-details">
+          <h3 class="card-title">{{ card.title }}</h3>
+          <p class="printer-status">{{ card.printerStatus }}</p>
+          <p class="status" [ngClass]="getPumpStatusClass(card.status)">{{ card.status }}</p>
+        </div>
+        <div class="fuel-pump-icon">
+          <mat-icon>local_gas_station</mat-icon>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+<!-- tank status  Container HTML -->
+  <div class="tank-status-container">
+    <h2>Tank Status</h2>
+    <div class="tank-cards">
+      <div *ngFor="let card of tankCards" class="tank-card">
+        <h3>{{ card.title }}</h3>
+        <div class="alert" [ngClass]="{'alert-green': card.alert === '0', 'alert-red': card.alert !== '0'}">
+          Alert: {{ card.alert }}
+        </div>
+        <div class="tank-fill">
+          <div class="tank-fill-bar" [ngStyle]="{'width': card.fillPercentage + '%'}"></div>
+        </div>
+        <div class="tank-details">
+          <div class="detail">
+            <span class="label">Capacity:</span>
+            <span class="value">{{ card.capacity }} L</span>
+          </div>
+          <div class="detail">
+            <span class="label">Volume:</span>
+            <span class="value">{{ card.volume }} L</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+</div>

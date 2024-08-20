@@ -1,0 +1,50 @@
+/* src/app/components/navbar/navbar.component.scss */
+
+/* Navbar styling */
+nav {
+  display: flex;
+  flex-direction: column; /* Arrange children vertically */
+  height: calc(100vh - 60px); /* Full viewport height minus header height */
+  background-color: #f5f5f5; /* Navbar background color */
+  position: fixed; /* Fixed position to stick to the side */
+  top: 60px; /* Start below the header */
+  left: 0;
+  width: 250px; /* Width of the sidebar */
+  z-index: 1000; /* Ensure it stays on top of other content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  box-sizing: border-box; /* Ensure padding/border are included in the height */
+}
+
+/* Ensure the list occupies the full height of the sidebar */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1; /* Allow list to grow and fill available space */
+  display: flex; /* Enable flexbox for list */
+  flex-direction: column; /* Stack list items vertically */
+}
+
+/* Ensure each list item is styled properly */
+li {
+  padding: 8px;
+  margin: 0;
+  border-bottom: 1px solid #ddd; /* Border for each list item */
+  background-color: white; /* List item background color */
+  display: flex; /* Enable flexbox for list item */
+  align-items: center; /* Center content vertically */
+}
+
+/* Remove border for the last list item */
+li:last-child {
+  border-bottom: none;
+}
+
+/* Ensure proper alignment and padding for links */
+a {
+  text-decoration: none;
+  color: inherit; /* Use the color from the parent element */
+  display: block;
+  padding: 8px 16px;
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}

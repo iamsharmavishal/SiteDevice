@@ -1,0 +1,73 @@
+<nav>
+  <ul>
+    <li *ngFor="let item of menuItems" (click)="navigateTo(item.route)">
+      {{ item.label }}
+    </li>
+  </ul>
+  
+
+  <!-- <div class="card-container">
+    <mat-card *ngFor="let card of cards" class="nav-card">
+      <mat-card-header>
+        <mat-card-title>{{ card.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="label-value-pair" *ngFor="let detail of card.details">
+          <span class="label">{{ detail.label }}:</span>
+          <span class="value">{{ detail.value }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngFor="let cd of cardList" class="nav-card">
+      <mat-card-header>
+        <mat-card-title>{{ cd.title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content> -->
+        <!-- For "Price and Status" -->
+        <!--<div *ngIf="cd.type === 'price' && isPriceStatus(cd.details)" class="card-content">
+          <div class="grid-layout">-->
+            <!-- Grid Header -->
+            <!-- <div class="grid-header">
+              <div class="header-grade">Grade</div>
+              <div class="header-pump">Pump</div>
+              <div class="header-pol">POL</div>
+            </div> -->
+            <!-- Grid Body -->
+            <!-- <div class="grid-body">
+              <div *ngFor="let dt of cd.details" class="grid-row"> -->
+                <!-- Petrol details under Grade column -->
+                <!-- <div class="grade">
+                  <div>{{ dt.grade || 'N/A' }}</div>
+                  <div *ngIf="dt.pump">{{ dt.pump }}</div>
+                </div>
+                <div class="pump">{{ dt.pump || 'N/A' }}</div>
+                <div class="pol">{{ dt.pol || 'N/A' }}</div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+    
+        <!-- For "ATG Status" -->
+        <!-- <div *ngIf="cd.type === 'atg' && isAtgStatus(cd.details)" class="card-content">
+          <div class="grid-layout"> -->
+            <!-- Grid Header -->
+            <!-- <div class="grid-header">
+              <div class="header-tanks">Tanks</div>
+              <div class="header-grade">Grade</div>
+              <div class="header-volume">Volume</div>
+            </div> -->
+            <!-- Grid Body -->
+            <!-- <div class="grid-body">
+              <div *ngFor="let dt of cd.details" class="grid-row">
+                <div class="tanks">{{ dt.tanks || 'N/A' }}</div>
+                <div class="grade">{{ dt.grade || 'N/A' }}</div>
+                <div class="volume">{{ dt.volume || 'N/A' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    
+  </div> -->
+</nav>

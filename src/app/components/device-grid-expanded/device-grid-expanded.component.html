@@ -1,0 +1,41 @@
+<!-- src/app/components/device-grid-expanded/device-grid-expanded.component.html -->
+
+<mat-card class="parent-card">
+  <mat-card-header class="card-header">
+    <div class="header-content">
+      <div class="header-title">FP</div>
+      <div class="header-subtitle">Last updated: a few minutes ago</div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="child-cards">
+      <mat-card *ngFor="let child of parentCard.children" class="expand-card">
+        <mat-card-header class="card-header">
+          <div class="header-content">
+            <div class="header-title">{{ child.title }}</div>
+            <div class="header-subtitle">Last updated: {{ child.lastUpdated || 'a few seconds ago' }}</div>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="card-details">
+            <div class="details-list">
+              <div *ngFor="let detail of child.details" class="details-item" [ngClass]="{'full-width': true}">
+                <div class="details-key">{{ detail.key }}</div>
+                <div class="details-value" [ngClass]="getStatusClass(detail.value)">
+                  {{ detail.value }}
+                </div>
+              </div>
+            </div>
+            <div class="configured-grades">
+              <div class="nested-header">Configured Grades</div>
+              <div *ngFor="let grade of child.grades" class="grade-item">
+                <div class="grade-key">{{ grade.grade }}</div>
+                <div class="grade-value">{{ grade.price }}</div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>
