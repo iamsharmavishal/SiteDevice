@@ -1,23 +1,20 @@
-/* src/app/footer/footer.component.scss */
-
-/* Mat-toolbar styling for the footer */
 mat-toolbar {
-  background-color: #f1f1f1; /* Background color for visibility */
-  color: #333; /* Text color */
-  padding: 10px; /* Padding for spacing */
-  text-align: center; /* Center align text */
-  border-top: 1px solid #ddd; /* Border at the top */
+  background-color: #f1f1f1; 
+  color: #333; 
+  padding: 10px; 
+  text-align: center; 
+  border-top: 1px solid #ddd; 
 }
 
 /* App-footer styling */
 app-footer {
-  width: 100%; /* Full width of the viewport */
-  background-color: #f1f1f1; /* Background color */
-  position: fixed; /* Fixed position to ensure it's always at the bottom */
+  width: 100%; 
+  background-color: #f1f1f1; 
+  position: fixed; 
   bottom: 0;
   left: 0;
-  text-align: center; /* Center align text */
-  padding: 10px; /* Padding for spacing */
-  border-top: 1px solid #ddd; /* Border at the top */
-  z-index: 1000; /* Ensure it's on top of other content */
+  text-align: center; 
+  padding: 10px; 
+  border-top: 1px solid #ddd; 
+  z-index: 1000; 
 }

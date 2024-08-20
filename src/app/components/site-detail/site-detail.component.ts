@@ -8,9 +8,10 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { DataService, DynamicCard, Detail, Transaction, PriceStatus } from '../../data.service'; 
 import { HttpClientModule } from '@angular/common/http';
+
 export interface TankCard {
   title: string;
-  alert: string;
+  alertStatus : string;
   fillPercentage: number; // Percentage of the tank fill
   capacity: number; // Capacity of the tank
   volume: number; // Current volume in the tank
@@ -75,19 +76,25 @@ export class SiteDetailComponent implements OnInit {
     this.tankCards = [
       {
         title: 'Tank 1 Unleaded',
-        alert: '0',
-        fillPercentage: 75, // Example fill percentage
-        capacity: 200, // Example capacity
-        volume: 1500 // Example volume
+        alertStatus: 'Alert: Low',
+        fillPercentage: 80,
+        capacity: 200,
+        volume: 2000
       },
       {
         title: 'Tank 2 Diesel',
-        alert: '2',
-        fillPercentage: 50, // Example fill percentage
-        capacity: 300, // Example capacity
-        volume: 1500 // Example volume
+        alertStatus: 'Alert: Normal',
+        fillPercentage: 60,
+        capacity: 300,
+        volume: 2500
       },
-      // Add more cards as needed
+      {
+        title: 'Tank 3 Premium',
+        alertStatus: 'Alert: High',
+        fillPercentage: 90,
+        capacity: 400,
+        volume: 3000
+      }
     ];
   }
 
@@ -99,7 +106,20 @@ export class SiteDetailComponent implements OnInit {
       this.cardList = data; // Assuming the response data is suitable for `cardList`
     });
   }
-
+  getWaveHeight(percentage: number): string {
+    return percentage > 100 ? '100' : percentage.toString();
+  }
+  getAlertClass(card: any): string {
+    if (card.alertStatus.includes('Low')) {
+      return 'low-alert';
+    } else if (card.alertStatus.includes('Normal')) {
+      return 'normal-alert';
+    } else if (card.alertStatus.includes('High')) {
+      return 'high-alert';
+    }
+    return '';
+  }
+  
   fetchNewContainerData(): void {
     this.dataService.getNewContainerData().subscribe(data => {
       this.dynamicPumpStatusCards = data;

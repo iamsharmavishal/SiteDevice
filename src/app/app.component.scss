@@ -1,6 +1,3 @@
-/* src/app/app.component.scss */
-
-/* Ensure the whole viewport is used */
 html, body {
   height: 100%;
   margin: 0;
@@ -23,24 +20,24 @@ app-header {
   background-color: #81c0ff; 
   color: white;
   z-index: 1000; 
-  height: 60px; 
+  //height: 60px; 
 }
 
 /* Main container to fit below the header and above the footer */
 mat-sidenav-container {
   display: flex;
-  flex-direction: column;
-  margin-top: 60px; /* Adjust according to header height */
-  margin-bottom: 0; /* Adjust according to footer height */
-  height: calc(100vh - 68px); /* Adjust according to header and footer height */
-  overflow: hidden; /* Prevent overflow */
+    flex-direction: column;
+    margin-top: 48px;
+    margin-bottom: 0;
+    height: calc(100vh - 50px);
+    overflow: hidden;
 }
 
 /* Content area styling */
 mat-sidenav-content {
   flex: 1;
   overflow: auto; 
-  padding: 16px; /* Adjust padding as needed */
+  padding: 0 16px 6px 16px;
 }
 
 /* Footer styling */
@@ -49,21 +46,22 @@ app-footer {
   padding: 10px;
   text-align: center;
   width: 100%;
-  position: fixed; /* Fixed position to ensure it's always at the bottom */
+  position: fixed;
   bottom: 0;
   left: 0;
   border-top: 1px solid #ddd;
-  z-index: 1000; /* Ensure it's on top of other content */
+  z-index: 1000; 
 }
 
 /* Ensure that the sidenav and content areas are correctly sized and positioned */
 mat-sidenav {
-  width: 250px; /* Adjust width as needed */
-  z-index: 1000; /* Ensure it stays above other content */
+  width: 250px; 
+  z-index: 1000;
+  box-sizing: content-box;
 }
 
 @media (max-width: 600px) {
   mat-sidenav {
-    width: 100%; /* Make sidenav full width on small screens */
+    width: 100%; 
   }
 }

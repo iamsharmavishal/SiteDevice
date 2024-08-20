@@ -2,5 +2,14 @@
   <button mat-icon-button (click)="toggleNav()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>CGI</span>
+  <span class="toolbar-title">CGI</span>
+  
+  <!-- Right-aligned icons -->
+  <span class="spacer"></span> <!-- Spacer to push icons to the right -->
+  <button mat-icon-button aria-label="Profile">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button aria-label="Logout">
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
 </mat-toolbar>

@@ -127,30 +127,37 @@
     </mat-card>
   </div>
 <!-- tank status  Container HTML -->
-  <div class="tank-status-container">
-    <h2>Tank Status</h2>
-    <div class="tank-cards">
-      <div *ngFor="let card of tankCards" class="tank-card">
-        <h3>{{ card.title }}</h3>
-        <div class="alert" [ngClass]="{'alert-green': card.alert === '0', 'alert-red': card.alert !== '0'}">
-          Alert: {{ card.alert }}
-        </div>
-        <div class="tank-fill">
-          <div class="tank-fill-bar" [ngStyle]="{'width': card.fillPercentage + '%'}"></div>
-        </div>
-        <div class="tank-details">
-          <div class="detail">
-            <span class="label">Capacity:</span>
-            <span class="value">{{ card.capacity }} L</span>
-          </div>
-          <div class="detail">
-            <span class="label">Volume:</span>
-            <span class="value">{{ card.volume }} L</span>
-          </div>
-        </div>
+<mat-card *ngFor="let card of tankCards" class="tank-card" [ngClass]="getAlertClass(card)">
+  <mat-card-header>
+    <mat-card-title>{{ card.title }}</mat-card-title>
+    <mat-card-subtitle>{{ card.alertStatus }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="tank-container">
+      <div class="tank-fill-bar" [ngStyle]="{'height': card.fillPercentage + '%'}">
+        <div class="wave"></div>
+      </div>
+      <div class="tank-text">{{ card.fillPercentage }}%</div>
+    </div>
+    <div class="tank-details">
+      <div class="tank-detail">
+        <span>Capacity</span>
+        <span>{{ card.capacity }}</span>
+      </div>
+      <div class="tank-detail">
+        <span>Volume</span>
+        <span>{{ card.volume }}</span>
       </div>
     </div>
-  </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
+
+
   
 
 </div>
