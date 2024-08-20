@@ -1,6 +1,7 @@
-<nav>
+<nav [class.open]="isNavbarOpen">
   <ul>
     <li *ngFor="let item of menuItems" (click)="navigateTo(item.route)">
+      <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
       {{ item.label }}
     </li>
   </ul>

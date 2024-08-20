@@ -20,12 +20,11 @@ mat-toolbar {
   .spacer {
     flex: 1; 
   }
-  
   .mat-mdc-icon-button.mat-mdc-button-base {
-
-    padding: 9px 12px;
+    padding: 9px 0px;
 }
 }
 .mat-toolbar-single-row {
   height: auto;
+  padding-left: 2px;
 }

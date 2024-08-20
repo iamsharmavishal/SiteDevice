@@ -20,24 +20,25 @@ app-header {
   background-color: #81c0ff; 
   color: white;
   z-index: 1000; 
-  //height: 60px; 
+  height: 48px; 
 }
 
-/* Main container to fit below the header and above the footer */
+/* Container for the sidenav and content */
 mat-sidenav-container {
   display: flex;
-    flex-direction: column;
-    margin-top: 48px;
-    margin-bottom: 0;
-    height: calc(100vh - 50px);
-    overflow: hidden;
+  flex-direction: column;
+  height: 93vh; 
+  margin-top: 48px; 
 }
 
 /* Content area styling */
 mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   overflow: auto; 
-  padding: 0 16px 6px 16px;
+  padding: 0;
+  box-sizing: border-box; 
 }
 
 /* Footer styling */
@@ -65,3 +66,4 @@ mat-sidenav {
     width: 100%; 
   }
 }
+

@@ -19,10 +19,10 @@
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
-      
+
       <mat-form-field appearance="outline" class="date-dropdown">
-        <mat-label>Select Date</mat-label>
-        <mat-select>
+        <!-- <mat-label>Select Date</mat-label> -->
+        <mat-select [(value)]="selectedDate">
           <mat-option *ngFor="let option of dateOptions" [value]="option.value">
             {{ option.label }}
           </mat-option>
@@ -97,17 +97,30 @@
         <mat-card-header>
           <div class="header-content">
             <div class="header-title">{{ card.title }}</div>
-            <div class="header-subtitle">Last updated: {{ card.lastUpdated }}</div>
+            <div class="header-subtitle">
+              <mat-icon>watch_later</mat-icon> Last updated: {{ card.lastUpdated }}
+            </div>
           </div>
         </mat-card-header>
         <mat-card-content>
-          <div [ngClass]="getGridClass(card.details)" class="details-grid">
-            <div *ngFor="let detail of card.details" class="details-item">
-              <div class="details-key">{{ detail.key }}:</div>
-              <div class="details-value" [ngClass]="getStatusClass(detail.key, detail.value)">{{ detail.value }}</div>
+          <div class="details-layout">
+            <div class="details-left">
+              <p>{{ card.dynamicText | slice:0:100 }}{{ card.dynamicText.length > 100 ? '...' : '' }}</p>
+            </div>
+            <div class="details-right">
+              <div class="details-grid">
+                <div *ngFor="let detail of card.details" class="details-item">
+                  <div class="details-key">{{ detail.key }}:</div>
+                  <div class="details-value status" [ngClass]="getStatusClass(detail.key, detail.value)">{{ detail.value
+                    }}</div>
+                </div>
+              </div>
             </div>
           </div>
         </mat-card-content>
+        <mat-card-actions class="bottom-content">
+          <a href="/more-options" class="more-options-link">More Options</a>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>
@@ -126,38 +139,38 @@
       </div>
     </mat-card>
   </div>
-<!-- tank status  Container HTML -->
-<mat-card *ngFor="let card of tankCards" class="tank-card" [ngClass]="getAlertClass(card)">
-  <mat-card-header>
-    <mat-card-title>{{ card.title }}</mat-card-title>
-    <mat-card-subtitle>{{ card.alertStatus }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="tank-container">
-      <div class="tank-fill-bar" [ngStyle]="{'height': card.fillPercentage + '%'}">
-        <div class="wave"></div>
-      </div>
-      <div class="tank-text">{{ card.fillPercentage }}%</div>
-    </div>
-    <div class="tank-details">
-      <div class="tank-detail">
-        <span>Capacity</span>
-        <span>{{ card.capacity }}</span>
-      </div>
-      <div class="tank-detail">
-        <span>Volume</span>
-        <span>{{ card.volume }}</span>
-      </div>
-    </div>
-  </mat-card-content>
-</mat-card>
-
-
-
-
-
-
-
-  
-
+  <!-- tank status  Container HTML -->
+  <!-- Parent Container for All Tank Cards -->
+  <div class="tank-cards-container">
+    <mat-card *ngFor="let card of tankCards" class="tank-card" [ngClass]="getAlertClass(card)">
+      <mat-card-content>
+        <div class="tank-details">
+          <div class="tank-info">
+            <span class="tank-name">{{ card.title }}</span>
+            <span class="tank-type">{{ card.type }}</span>
+          </div>
+          <div class="tank-status">
+            <span [ngStyle]="{'color': getStatusColor(card.alertStatus)}">Alert: {{ card.alertStatus }}</span>
+          </div>
+        </div>
+        <div class="tank-container">
+          <div class="tank-fill-bar" [ngStyle]="{'height': getWaveHeight(card.fillPercentage)}">
+            <div class="wave" [ngStyle]="{'background': getWaveColor(card.fillPercentage)}">
+              <div class="tank-text">{{ card.fillPercentage }}%</div>
+            </div>
+          </div>
+        </div>
+        <div class="tank-stats">
+          <div class="tank-detail">
+            <span>Capacity</span>
+            <span>{{ card.capacity }}</span>
+          </div>
+          <div class="tank-detail">
+            <span>Volume</span>
+            <span>{{ card.volume }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

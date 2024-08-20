@@ -1,8 +1,8 @@
 <app-header (sidenavToggle)="toggleSidenav()"></app-header> <!-- Header emits event to toggle sidenav -->
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav mode="side" [(opened)]="isSidenavOpen">
-    <app-navbar></app-navbar> <!-- Navbar inside sidenav -->
+  <mat-sidenav #sidenav mode="side" [(opened)]="isNavbarOpen" (openedChange)="onSidenavToggle($event)">
+    <app-navbar [isNavbarOpen]="isNavbarOpen"></app-navbar>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet></router-outlet> <!-- Content of routed views -->

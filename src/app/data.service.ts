@@ -37,6 +37,7 @@ export class DataService {
     {
       title: 'Site Controller',
       lastUpdated: '3 minutes ago',
+      dynamicText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing eliLorem ipsum dolor sit amet, consectetur adipiscing eli',
       details: [
         { key: 'VM Status', value: 'Online' },
         { key: 'Host Status', value: 'Connected' }
@@ -45,6 +46,7 @@ export class DataService {
     {
       title: 'EPC',
       lastUpdated: '4 minutes ago',
+      dynamicText: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       details: [
         { key: 'SAF Count', value: '0' },
         { key: 'VM Status', value: 'Offline' },
@@ -55,6 +57,7 @@ export class DataService {
     {
       title: 'POS',
       lastUpdated: '10 minutes ago',
+      dynamicText: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       details: [
         { key: 'VM Status', value: 'Online' },
         { key: 'Host Status', value: 'Connected' }
@@ -63,6 +66,7 @@ export class DataService {
     {
       title: 'Pump Controller',
       lastUpdated: '4 minutes ago',
+      dynamicText: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       details: [
         { key: 'VM Status', value: 'Online' },
         { key: 'Host Status', value: 'Connected' }

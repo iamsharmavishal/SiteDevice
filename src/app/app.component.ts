@@ -27,9 +27,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 })
 export class AppComponent {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  isSidenavOpen = false;
+  isNavbarOpen = false;
 
   toggleSidenav() {
-    this.isSidenavOpen = !this.isSidenavOpen;
+    this.isNavbarOpen = !this.isNavbarOpen;
+  }
+  onSidenavToggle(opened: boolean) {
+    this.isNavbarOpen = opened;
   }
 }
