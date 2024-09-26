@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
-import { DataService, DynamicCard, Detail, Transaction, PriceStatus } from '../../data.service'; 
-import { HttpClientModule } from '@angular/common/http';
-
-export interface TankCard {
-  title: string;
-  type: string; // Added type field
-  alertStatus: string;
-  fillPercentage: number; // Percentage of the tank fill
-  capacity: number; // Capacity of the tank
-  volume: number; // Current volume in the tank
-}
+import {
+  DataService,
+  DynamicCard,
+  Detail,
+  Transaction,
+  PriceStatus,
+  TankCard,
+} from '../../data.service';
+import { SocketService } from '../../socket.service';
 
 @Component({
   selector: 'app-site-detail',
   standalone: true,
   imports: [
+    HttpClientModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -29,116 +30,96 @@ export interface TankCard {
     MatIconModule,
     CommonModule,
     MatTableModule,
-    HttpClientModule
+    MatIconButton,
   ],
   templateUrl: './site-detail.component.html',
-  styleUrls: ['./site-detail.component.scss']
+  styleUrls: ['./site-detail.component.scss'],
 })
 export class SiteDetailComponent implements OnInit {
   siteInfo = {
     number: '4352',
-    details: '123 Radiant VTX 7749'
+    details: '123 Radiant VTX 7749',
   };
-
+  svgContent: string | null = null;
   dateOptions = [
     { label: 'Today', value: 'today' },
     { label: 'Yesterday', value: 'yesterday' },
-    { label: 'Last 7 Days', value: 'last7days' }
+    { label: 'Last 7 Days', value: 'last7days' },
   ];
 
   outdoorTransaction: Transaction = {
     label: 'Outdoor Transaction',
-    value: 2000
+    value: 2000,
   };
   selectedDate = this.dateOptions[0].value;
   indoorTransaction: Transaction = {
     label: 'Indoor Transaction',
-    value: 1500
+    value: 1500,
   };
-
-  priceStatusData: PriceStatus[] = [
-    { name: 'Patrol', pole: 'Active', price: 100 },
-    { name: 'Diesel', pole: 'Inactive', price: 150 },
-    { name: 'Grade 1', pole: 'Active', price: 200 },
-    { name: 'Grade 2', pole: 'Active', price: 250 },
-    { name: 'Grade 3', pole: 'Inactive', price: 300 }
-  ];
 
   displayedColumns: string[] = ['name', 'pole', 'price'];
 
   cardList: any[] = [];
   tankCards: TankCard[] = [];
   dynamicPumpStatusCards: DynamicCard[] = [];
+  priceStatusData: PriceStatus[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private socketService: SocketService
+  ) {}
 
   ngOnInit(): void {
-    this.fetchExistingData();
-    this.fetchNewContainerData();
-    this.tankCards = [
-      {
-        title: 'Tank 1',
-        type: 'Unleaded', // Added type
-        alertStatus: '0',
-        fillPercentage: 30,
-        capacity: 200,
-        volume: 2000
-      },
-      {
-        title: 'Tank 2',
-        type: 'Diesel', // Added type
-        alertStatus: '1',
-        fillPercentage: 60,
-        capacity: 300,
-        volume: 2500
-      },
-      {
-        title: 'Tank 3',
-        type: 'Premium', // Added type
-        alertStatus: '0',
-        fillPercentage: 90,
-        capacity: 400,
-        volume: 3000
-      },
-      {
-        title: 'Tank 4',
-        type: 'Premium', // Added type
-        alertStatus: '0',
-        fillPercentage: 30,
-        capacity: 400,
-        volume: 3000
-      },
-    {
-      title: 'Tank 5',
-      type: 'Premium', // Added type
-      alertStatus: '0',
-      fillPercentage: 95,
-      capacity: 400,
-      volume: 3000
-    }
-    ];
+    this.fetchCardData();
+    this.fetchPumstatusList();
+    this.fetchTankDataList();
+    this.fetchPriceList();
+
+    // Subscribe to tank data from the Socket.IO server
+    this.socketService.listenForTankData().subscribe((data: any[]) => {
+       this.tankCards = data;
+      console.log('Real-time tank data:', this.tankCards);
+    });
   }
 
-  fetchExistingData(): void {
-    this.dataService.getExistingData().subscribe(data => {
-      console.log('Existing Data:', data);
+  fetchCardData(): void {
+    this.dataService.getCardData().subscribe((data) => {
+      console.log('Card Data:', data);
       this.cardList = data; // Assuming the response data is suitable for `cardList`
     });
   }
 
-  fetchNewContainerData(): void {
-    this.dataService.getNewContainerData().subscribe(data => {
+  fetchPumstatusList(): void {
+    this.dataService.getPumpStatusData().subscribe((data) => {
       this.dynamicPumpStatusCards = data;
+    });
+  }
+  fetchPriceList(): void {
+    this.dataService.getPriceListData().subscribe((data) => {
+      this.priceStatusData = data;
+    });
+  }
+
+  fetchTankDataList(): void {
+    this.dataService.getTankData().subscribe((data: any[]) => {
+      // Assuming the backend is returning a compatible structure
+
+      this.tankCards = data.map((tank, index) => ({
+        ...tank,
+        fillPercentage: tank.fillPercentage || 0,
+        waterFillPercentage: tank.waterFillPercentage || 0,
+        volume: tank.volume || 0,
+      }));
     });
   }
 
   getStatusColor(alertStatus: string): string {
     const alertLevel = parseInt(alertStatus, 10); // Convert the alertStatus to an integer
-  
+
     if (isNaN(alertLevel)) {
       return '#ffffff'; // Default color if alertStatus is not a number
     }
-  
+
     if (alertLevel > 5) {
       return '#ff4d4d'; // Red for alert levels greater than 5
     } else if (alertLevel > 0) {
@@ -146,17 +127,17 @@ export class SiteDetailComponent implements OnInit {
     } else if (alertLevel === 0) {
       return '#00cc44'; // Green for alert level of 0 (no alert)
     }
-  
+
     return '#ffffff'; // Default color if none of the conditions match
   }
 
   getAlertClass(card: TankCard): string {
     const alertLevel = parseInt(card.alertStatus, 10); // Convert the alertStatus to an integer
-  
+
     if (isNaN(alertLevel)) {
       return ''; // Return an empty string if alertStatus is not a number
     }
-  
+
     if (alertLevel > 5) {
       return 'high-alert'; // Class for high alert
     } else if (alertLevel > 0) {
@@ -164,23 +145,18 @@ export class SiteDetailComponent implements OnInit {
     } else if (alertLevel === 0) {
       return 'low-alert'; // Class for low alert
     }
-  
+
     return ''; // Default return if none of the conditions match
   }
-  
 
   getStatusClass(key: string, value: string): string {
-    switch (value) {
-      case 'Online':
-        return 'online';
-      case 'Offline':
-        return 'offline';
-      case 'Connected':
-        return 'connected';
-      case 'Disconnected':
-        return 'disconnected';
+    switch (value.toLowerCase()) {
+      case 'active':
+        return 'green';
+      case 'stopped':
+        return 'red';
       default:
-        return '';
+        return 'blue';
     }
   }
 
@@ -207,8 +183,8 @@ export class SiteDetailComponent implements OnInit {
         return 'card-light-red';
       case 'Payment':
         return 'card-light-green';
-        case 'Fuelling':
-          return 'card-light-blue';
+      case 'Fuelling':
+        return 'card-light-blue';
       default:
         return '';
     }
@@ -217,32 +193,25 @@ export class SiteDetailComponent implements OnInit {
   getGridClass(details: Detail[]): string {
     return details.length > 2 ? 'details-grid' : 'details-grid single-column';
   }
-  getWaveColor(percentage: number): string {
-    if (percentage >= 95) {
-      return '#4cc3ff'; // Dark blue when almost full
-    } else if (percentage >= 70) {
-      return '#4CAF50'; // Green for high fill
-    } else if (percentage >= 50) {
-      return '#ff6a00'; // Orange for moderate fill
-    } else if (percentage >= 10) {
-      return '#ffcb33'; // Yellow for low fill
-    } else {
-      return '#F44336'; // Red for very low fill
-    }
-  }
-  
+
   getWaveHeight(percentage: number): string {
     return percentage > 100 ? '100%' : `${percentage}%`;
   }
-  
-  getWaveScale(percentage: number): string {
-    if (percentage >= 95) {
-      return '1'; // No wave when almost full
-    } else if (percentage < 50) {
-      return '1.2'; // Small wave for lower fill percentages
-    } else {
-      return '1'; // Normal size for moderate and high fill percentages
+
+  getFillColorByType(type: string): string {
+    switch (type.toLowerCase()) {
+      case 'unleaded':
+        return '#FF6A00';
+      case 'regular':
+        return '#4CC3FF';
+      case 'octane 91':
+        return '#FFCB33';
+      case 'diesel':
+        return '#128353';
+      case 'petrol':
+        return '#9500ff'; // Custom color for petrol
+      default:
+        return '#e64ab2'; // Default color for unknown types
     }
   }
-  
 }

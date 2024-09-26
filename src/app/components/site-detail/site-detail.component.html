@@ -14,14 +14,13 @@
     <div class="site-info-right">
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <input matInput placeholder="Search" />
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="date-dropdown">
-        <!-- <mat-label>Select Date</mat-label> -->
         <mat-select [(value)]="selectedDate">
           <mat-option *ngFor="let option of dateOptions" [value]="option.value">
             {{ option.label }}
@@ -46,7 +45,11 @@
           <mat-card class="transaction-card m-b-10">
             <div class="card-content">
               <p class="transaction-label">{{ outdoorTransaction.label }}</p>
-              <p class="transaction-value">{{ outdoorTransaction.value | currency }}</p>
+              <p class="transaction-value">
+                {{
+                  outdoorTransaction.value | currency : "" : "symbol" : "1.0-0"
+                }}
+              </p>
             </div>
             <div class="thumb-icon">
               <mat-icon>thumb_up</mat-icon>
@@ -56,7 +59,11 @@
           <mat-card class="transaction-card">
             <div class="card-content">
               <p class="transaction-label">{{ indoorTransaction.label }}</p>
-              <p class="transaction-value">{{ indoorTransaction.value | currency }}</p>
+              <p class="transaction-value">
+                {{
+                  indoorTransaction.value | currency : "" : "symbol" : "1.0-0"
+                }}
+              </p>
             </div>
           </mat-card>
         </div>
@@ -77,16 +84,20 @@
 
           <ng-container matColumnDef="pole">
             <mat-header-cell *matHeaderCellDef> Pole </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.pole }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.pump | currency }}
+            </mat-cell>
           </ng-container>
 
           <ng-container matColumnDef="price">
             <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.price | currency }} </mat-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.pole | currency }}
+            </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
         </mat-table>
       </mat-card-content>
     </mat-card>
@@ -98,68 +109,136 @@
           <div class="header-content">
             <div class="header-title">{{ card.title }}</div>
             <div class="header-subtitle">
-              <mat-icon>watch_later</mat-icon><span> Last updated: {{ card.lastUpdated }}</span>
+              <mat-icon>watch_later</mat-icon
+              ><span> Last updated: {{ card.lastUpdated }}</span>
             </div>
           </div>
         </mat-card-header>
         <mat-card-content>
           <div class="details-layout">
             <div class="details-left">
-              <p>{{ card.dynamicText | slice:0:100 }}{{ card.dynamicText.length > 100 ? '...' : '' }}</p>
+              <p>
+                {{ card.dynamicText | slice : 0 : 100
+                }}{{ card.dynamicText.length > 100 ? "..." : "" }}
+              </p>
             </div>
             <div class="details-right">
               <div class="details-grid">
                 <div *ngFor="let detail of card.details" class="details-item">
                   <div class="details-key">{{ detail.key }}:</div>
-                  <div class="details-value status" [ngClass]="getStatusClass(detail.key, detail.value)">{{ detail.value
-                    }}</div>
+                  <div
+                    class="details-value status"
+                    [ngClass]="getStatusClass(detail.key, detail.value)"
+                  >
+                    {{ detail.value }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </mat-card-content>
         <mat-card-actions class="bottom-content">
-          <a href="/more-options" class="more-options-link">More Options</a>
+          <a href="/more-options" class="more-options-link">MORE OPTIONS</a>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
   <!-- pump status Container HTML -->
   <div class="dynamic-cards-container">
-    <mat-card *ngFor="let card of dynamicPumpStatusCards" [ngClass]="getCardBackgroundColor(card.status)">
+    <mat-card
+      *ngFor="let card of dynamicPumpStatusCards"
+      [ngClass]="getCardBackgroundColor(card.status)"
+    >
       <div class="card-content">
         <div class="card-details">
           <h3 class="card-title">{{ card.title }}</h3>
-          <p class="printer-status">{{ card.printerStatus }}</p>
-          <p class="status" [ngClass]="getPumpStatusClass(card.status)">{{ card.status }}</p>
+          <p class="printer-status">{{ card.printerStatus | uppercase }}</p>
+          <span class="status" [ngClass]="getPumpStatusClass(card.status)"
+            ><mat-icon>fiber_manual_record</mat-icon
+            ><span class="status-text">{{ card.status }}</span></span
+          >
         </div>
         <div class="fuel-pump-icon">
           <mat-icon>local_gas_station</mat-icon>
         </div>
       </div>
     </mat-card>
-  </div>  
+  </div>
   <!-- tank status  Container HTML -->
-  <!-- Parent Container for All Tank Cards -->
+  <div class="eod-start-date-card">
+    <div class="eod-header">TANK STATUS</div>
+    <!-- EOD Start Date Content -->
+  </div>
   <div class="tank-cards-container">
-    <mat-card *ngFor="let card of tankCards" class="tank-card" [ngClass]="getAlertClass(card)">
+    <mat-card
+      *ngFor="let card of tankCards"
+      class="tank-card"
+      [ngClass]="getAlertClass(card)"
+    >
       <mat-card-content>
         <div class="tank-details">
           <div class="tank-info">
             <span class="tank-name">{{ card.title }}</span>
-            <span class="tank-type">{{ card.type }}</span>
+            <span class="tank-type">{{ card.type | uppercase }}</span>
           </div>
           <div class="tank-status">
-            <span [ngStyle]="{'color': getStatusColor(card.alertStatus)}">Alert: {{ card.alertStatus }}</span>
+            <span [ngStyle]="{ color: getStatusColor(card.alertStatus) }"
+              >Alert: {{ card.alertStatus }}</span
+            >
           </div>
         </div>
+
         <div class="tank-container">
-          <div class="tank-fill-bar" [ngStyle]="{'height': getWaveHeight(card.fillPercentage)}">
-            <div class="wave" [ngStyle]="{'background': getWaveColor(card.fillPercentage)}">
-              <div class="tank-text">{{ card.fillPercentage }}%</div>
+          <!-- Oil fill with bubbling effect -->
+          <div
+            class="tank-fill-bar oil wave"
+            [ngStyle]="{
+              height: getWaveHeight(
+                card.fillPercentage + card.waterFillPercentage
+              ),
+              background:
+                card.fillPercentage < 20
+                  ? '#fd3737'
+                  : getFillColorByType(card.type),
+              opacity: card.fillPercentage < 10 ? '0.5' : '1'
+            }"
+          >
+            <div
+              *ngIf="card.fillPercentage < 20 && card.fillPercentage > 13"
+              class="tank-text low-oil-warning"
+            >
+              Low Oil!
+            </div>
+            <div
+              *ngIf="card.fillPercentage > 20"
+              [ngClass]="{ 'low-oil-warning': card.fillPercentage < 28 }"
+              class="tank-text"
+            >
+              {{ card.fillPercentage }}%
+            </div>
+          </div>
+          <!-- Water fill -->
+          <div
+            class="tank-fill-bar water wave"
+            [ngStyle]="{
+              height: getWaveHeight(card.waterFillPercentage),
+              background: '#DEF4FC',
+              opacity: 1
+            }"
+          >
+            <div
+              *ngIf="card.waterFillPercentage < 10"
+              class="low-warning"
+            ></div>
+            <div
+              class="tank-text water-text"
+              [ngClass]="{ 'low-oil-warning': card.waterFillPercentage < 19 }"
+            >
+              {{ card.waterFillPercentage }}%
             </div>
           </div>
         </div>
+
         <div class="tank-stats">
           <div class="tank-detail">
             <span>Capacity</span>

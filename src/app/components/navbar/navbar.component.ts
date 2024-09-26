@@ -31,9 +31,11 @@ export class NavbarComponent {
   
   menuItems: MenuItem[] = [
    // { label: 'Home', route: '/home' },
-    { label: 'Site Details', route: '/site-detail', icon: 'home' },
-    { label: 'Device Grid', route: '/device-grid', icon: 'info' },
-    { label: 'Device Grid Expanded', route: '/device-grid-expanded', icon: 'info' }
+    { label: 'Dashboard', route: '/site-detail', icon: 'dashboard_2' },
+    { label: 'Situations', route: '/device-grid', icon: 'folder' },
+    { label: 'Alerts', route: '/site-detail', icon: 'notifications' },
+    { label: 'Events', route: '/site-detail', icon: 'event' },
+    { label: 'Policy', route: '/site-detail', icon: 'policy' }
   ];
 
   constructor(private router: Router) {}
