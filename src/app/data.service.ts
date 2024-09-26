@@ -36,7 +36,7 @@ export class DataService {
   private cardList = [
     {
       title: 'Site Controller',
-      lastUpdated: '3 minutes ago',
+      lastUpdated: '3 min ago',
       dynamicText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing eliLorem ipsum dolor sit amet, consectetur adipiscing eli',
       details: [
         { key: 'VM Status', value: 'Online' },
@@ -45,7 +45,7 @@ export class DataService {
     },
     {
       title: 'EPC',
-      lastUpdated: '4 minutes ago',
+      lastUpdated: '4 min ago',
       dynamicText: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       details: [
         { key: 'SAF Count', value: '0' },
@@ -56,7 +56,7 @@ export class DataService {
     },
     {
       title: 'POS',
-      lastUpdated: '10 minutes ago',
+      lastUpdated: '10 min ago',
       dynamicText: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       details: [
         { key: 'VM Status', value: 'Online' },
@@ -65,7 +65,7 @@ export class DataService {
     },
     {
       title: 'Pump Controller',
-      lastUpdated: '4 minutes ago',
+      lastUpdated: '4 min ago',
       dynamicText: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
       details: [
         { key: 'VM Status', value: 'Online' },
@@ -77,29 +77,35 @@ export class DataService {
   dynamicPumpStatusCards: DynamicCard[] = [
     {
       title: 'Gilbarco - FPI',
-      printerStatus: 'Idle',
-      status: 'Online'
+      printerStatus: 'Printer status',
+      status: 'Idle'
     },
     {
       title: 'Gilbarco - FPI 2',
-      printerStatus: 'Busy',
-      status: 'Offline'
+      printerStatus: 'Printer status',
+      status: 'Payment'
     },
     {
       title: 'Gilbarco - FPI 3',
-      printerStatus: 'Idle',
-      status: 'Disconnected'
+      printerStatus: 'Printer status',
+      status: 'Offline'
     },
     {
       title: 'Gilbarco - FPI 4',
-      printerStatus: 'Busy',
-      status: 'Online'
+      printerStatus: 'Printer status',
+      status: 'Idle'
     },
     {
       title: 'Gilbarco - FPI 5',
-      printerStatus: 'Idle',
+      printerStatus: 'Printer status',
       status: 'Offline'
+    },
+    {
+      title: 'Gilbarco - FPI 6',
+      printerStatus: 'Printer status',
+      status: 'Fuelling'
     }
+    
   // Add more cards as needed
 ];
 

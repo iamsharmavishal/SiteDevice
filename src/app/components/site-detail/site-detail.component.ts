@@ -186,12 +186,14 @@ export class SiteDetailComponent implements OnInit {
 
   getPumpStatusClass(status: string): string {
     switch (status) {
-      case 'Online':
-        return 'online';
+      case 'Idle':
+        return 'idle';
       case 'Offline':
         return 'offline';
-      case 'Disconnected':
-        return 'disconnected';
+      case 'Payment':
+        return 'payment';
+      case 'Fuelling':
+        return 'fuelling';
       default:
         return '';
     }
@@ -200,11 +202,13 @@ export class SiteDetailComponent implements OnInit {
   getCardBackgroundColor(printerStatus: string): string {
     switch (printerStatus) {
       case 'Idle':
-        return 'card-light-green';
-      case 'Busy':
-        return 'card-light-red';
-      case 'Error':
         return 'card-light-orange';
+      case 'Offline':
+        return 'card-light-red';
+      case 'Payment':
+        return 'card-light-green';
+        case 'Fuelling':
+          return 'card-light-blue';
       default:
         return '';
     }

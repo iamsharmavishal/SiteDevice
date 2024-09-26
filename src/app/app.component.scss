@@ -1,49 +1,59 @@
+/* Global styles */
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Body styling to manage overflow */
 body {
   display: flex;
   flex-direction: column;
-  margin: 0;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-/* Fixed header styling */
+/* Header styles */
 app-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #81c0ff; 
+  background-color: #81c0ff;
   color: white;
-  z-index: 1000; 
-  height: 48px; 
+  z-index: 1000;
+  height: 48px; /* Material design recommended header height */
 }
 
-/* Container for the sidenav and content */
+/* Sidenav container */
 mat-sidenav-container {
   display: flex;
   flex-direction: column;
-  height: 93vh; 
-  margin-top: 48px; 
+  height: calc(100vh - 56px); /* Full height minus header */
+  margin-top: 48px; /* Offset content by header height */
 }
 
-/* Content area styling */
+
+
+/* Main content area */
 mat-sidenav-content {
-  display: flex;
-  flex-direction: column;
   flex: 1;
-  overflow: auto; 
-  padding: 0;
-  box-sizing: border-box; 
+  overflow-y: auto;
+  padding: 8px 16px;
+  box-sizing: border-box;
+
+  /* Adjust padding for mobile and tablet */
+  @media (max-width: 600px) {
+    padding: 8px;
+  }
+  
+  @media (min-width: 600px) and (max-width: 1024px) {
+    padding: 12px;
+  }
 }
 
-/* Footer styling */
+/* Footer styles */
 app-footer {
-  background: #f1f1f1;
+  background-color: #f1f1f1;
   padding: 10px;
   text-align: center;
   width: 100%;
@@ -51,19 +61,7 @@ app-footer {
   bottom: 0;
   left: 0;
   border-top: 1px solid #ddd;
-  z-index: 1000; 
-}
-
-/* Ensure that the sidenav and content areas are correctly sized and positioned */
-mat-sidenav {
-  width: 250px; 
   z-index: 1000;
-  box-sizing: content-box;
 }
 
-@media (max-width: 600px) {
-  mat-sidenav {
-    width: 100%; 
-  }
-}
 
