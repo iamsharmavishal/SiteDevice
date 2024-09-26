@@ -15,115 +15,52 @@ export interface Transaction {
 }
 
 export interface PriceStatus {
+  id :number;
   name: string;
-  pole: string;
-  price: number;
+  pump: number;
+  pole: number;
+ 
 }
 
 export interface DynamicCard {
+  id :number;
   title: string;
   printerStatus: string;
   status: string;
 }
+export interface TankCard {
+  svgContent: any;
+  title: string;
+  type: string; // Type of fuel in the tank
+  alertStatus: string; // The alert status (0, 1, etc.)
+  fillPercentage: number; // Oil fill percentage
+  waterFillPercentage: number; // Water fill percentage
+  capacity: number; // Capacity of the tank
+  volume: number; // Combined oil and water volume
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = `${environment.apiUrl}/data`;
-
-  // Dummy data
-  private cardList = [
-    {
-      title: 'Site Controller',
-      lastUpdated: '3 min ago',
-      dynamicText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing eliLorem ipsum dolor sit amet, consectetur adipiscing eli',
-      details: [
-        { key: 'VM Status', value: 'Online' },
-        { key: 'Host Status', value: 'Connected' }
-      ]
-    },
-    {
-      title: 'EPC',
-      lastUpdated: '4 min ago',
-      dynamicText: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      details: [
-        { key: 'SAF Count', value: '0' },
-        { key: 'VM Status', value: 'Offline' },
-        { key: 'SAF Amount', value: '$0.00' },
-        { key: 'Host Status', value: 'Connected' }
-      ]
-    },
-    {
-      title: 'POS',
-      lastUpdated: '10 min ago',
-      dynamicText: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      details: [
-        { key: 'VM Status', value: 'Online' },
-        { key: 'Host Status', value: 'Connected' }
-      ]
-    },
-    {
-      title: 'Pump Controller',
-      lastUpdated: '4 min ago',
-      dynamicText: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      details: [
-        { key: 'VM Status', value: 'Online' },
-        { key: 'Host Status', value: 'Connected' }
-      ]
-    }
-  ];
-
-  dynamicPumpStatusCards: DynamicCard[] = [
-    {
-      title: 'Gilbarco - FPI',
-      printerStatus: 'Printer status',
-      status: 'Idle'
-    },
-    {
-      title: 'Gilbarco - FPI 2',
-      printerStatus: 'Printer status',
-      status: 'Payment'
-    },
-    {
-      title: 'Gilbarco - FPI 3',
-      printerStatus: 'Printer status',
-      status: 'Offline'
-    },
-    {
-      title: 'Gilbarco - FPI 4',
-      printerStatus: 'Printer status',
-      status: 'Idle'
-    },
-    {
-      title: 'Gilbarco - FPI 5',
-      printerStatus: 'Printer status',
-      status: 'Offline'
-    },
-    {
-      title: 'Gilbarco - FPI 6',
-      printerStatus: 'Printer status',
-      status: 'Fuelling'
-    }
-    
-  // Add more cards as needed
-];
+  private apiUrl = `${environment.apiUrl}api`;
 
   constructor(private http: HttpClient) { }
 
   // Uncomment the following code to use the API
-  /*
-  getExistingData(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/existing-data`).pipe(
-      catchError(this.handleError('getExistingData', {}))
+
+  getPriceListData(): Observable<PriceStatus[]> {
+    return this.http.get<PriceStatus[]>(`${this.apiUrl}/priceList`).pipe(
+      catchError(this.handleError('getPriceListData', []))
     );
   }
-  */
+ 
 
-  getExistingData(): Observable<any> {
+  getCardData(): Observable<any> {
     // Return dummy data instead of making an HTTP call
-    return of(this.cardList).pipe(
-      catchError(this.handleError('getExistingData', []))
+    return this.http.get<any>(`${this.apiUrl}/siteList`).pipe(
+      catchError(this.handleError('getCardData', {}))
     );
   }
 
@@ -136,10 +73,17 @@ export class DataService {
   }
   */
 
-  getNewContainerData(): Observable<DynamicCard[]> {
+  getPumpStatusData(): Observable<DynamicCard[]> {
     // Return an empty array of DynamicCard for dummy data
-    return of(this.dynamicPumpStatusCards).pipe(
-      catchError(this.handleError('getNewContainerData', []))
+    return this.http.get<DynamicCard[]>(`${this.apiUrl}/pumpStatusList`).pipe(
+      catchError(this.handleError('getPumpStatusData', []))
+    );
+  }
+
+  getTankData(): Observable<any> {
+    // Return an empty array of DynamicCard for dummy data
+    return this.http.get<any[]>(`${this.apiUrl}/tankData`).pipe(
+      catchError(this.handleError('getTankDataData', []))
     );
   }
 

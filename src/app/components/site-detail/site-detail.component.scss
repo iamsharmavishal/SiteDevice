@@ -16,7 +16,7 @@
 .home-header {
   font-size: 1rem;
   font-weight: 700;
-  color: #4183c4;
+  color: #81c0ff;
 }
 
 .site-info-card {
@@ -31,7 +31,7 @@
 }
 
 .site-info-left {
-  flex: 1;
+  flex: 1 1 50%;
   h3,
   p {
     margin: 0;
@@ -56,9 +56,14 @@
   gap: 12px;
   flex: 1;
   max-width: 300px;
+  margin-top: 4px;
   .mat-mdc-form-field-subscript-wrapper,
   .mat-mdc-form-field-bottom-align::before {
     line-height: 0 !important;
+  }
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing {
+    border-color: #ddd !important;
   }
 }
 
@@ -149,16 +154,16 @@
   }
 
   .transaction-label {
-    font-weight: bold;
     font-size: 0.75rem;
     color: #333;
     margin-bottom: 0;
   }
 
   .transaction-value {
-    font-size: 0.75rem;
+    font-size: 1rem;
     color: #666;
     margin-bottom: 24px;
+    font-weight: bold;
   }
 }
 
@@ -168,12 +173,12 @@
   top: 28px;
   mat-icon {
     color: blue;
-    font-size: 1.75rem;
+    font-size: 1.65rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     background-color: #e0e0e0;
     transition: background-color 0.3s;
@@ -195,37 +200,38 @@
   .mat-mdc-card-content {
     padding: 0;
   }
-}
+  mat-card-header {
+    padding: 3px 8px;
+    border: none;
+  }
+  mat-row,
+  mat-header-row {
+    min-height: 35px;
+  }
+  mat-card-title {
+    color: #414141;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  mat-table {
+    width: 100%;
+  }
+  mat-header-cell {
+    padding: 0 8px;
+  }
 
-.price-status-card mat-card-header {
-  padding: 8px;
-  border: none;
-}
+  mat-header-cell {
+    color: #717171;
+    font-size: 12px;
+    font-weight: 700;
+  }
 
-.price-status-card mat-card-title {
-  color: #414141;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.price-status-card mat-table {
-  width: 100%;
-}
-
-.price-status-card mat-header-cell,
-.price-status-card mat-cell {
-  padding: 8px;
-}
-
-.price-status-card mat-header-cell {
-  color: #717171;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.price-status-card mat-cell {
-  text-align: right;
-  color: #666;
+  mat-cell {
+    text-align: right;
+    color: #666;
+    font-size: 12px;
+    padding: 0 8px;
+  }
 }
 
 //exisitng card css
@@ -289,7 +295,7 @@
   display: flex;
   align-items: center;
   color: #666;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   white-space: nowrap;
   width: 50%;
   span {
@@ -299,7 +305,7 @@
   }
   mat-icon {
     margin-right: -6px;
-    font-size: 16px;
+    font-size: 1rem;
     margin-top: 5px;
   }
 }
@@ -355,12 +361,25 @@
 
 .details-value {
   color: #666;
+  font-size: 0.65rem;
+  font-weight: 500;
+  &.green {
+    color: green;
+  }
+
+  &.red {
+    color: red;
+  }
+  &.blue {
+    color: #5236ab;
+  }
 }
 
 mat-card-actions {
   display: flex;
   justify-content: flex-start;
-  padding: 8px 8px 0 8px;
+  padding: 0 8px;
+  min-height: 30px;
 }
 
 .more-options-link {
@@ -423,8 +442,8 @@ mat-card-actions {
     /* Set flexible width for cards, allowing more to fit in the row */
     flex: 1 1 calc(16% - 12px); /* Allows up to 6 cards per row based on available space */
     @media (max-width: 1084px) {
-      flex: 1 1 calc(24% - 10px); /* For medium screens, take up to 4 in a row */
-      max-width: calc(25% - 12px);
+      flex: 1 1 calc(20% - 10px);
+      max-width: calc(20% - 12px);
     }
     @media (max-width: 800px) {
       flex: 1 1 calc(24% - 10px); /* For medium screens, take up to 4 in a row */
@@ -463,7 +482,7 @@ mat-card-actions {
 
     .card-title {
       color: #414141;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
     }
 
@@ -478,6 +497,8 @@ mat-card-actions {
       font-size: 11px;
       font-family: "Roboto";
       font-weight: 500;
+      display: flex;
+      flex-direction: row;
 
       &.payment {
         color: green;
@@ -493,6 +514,14 @@ mat-card-actions {
 
       &.fuelling {
         color: #5236ab;
+      }
+      mat-icon {
+        font-size: 16px;
+        padding-top: 1px;
+        margin-left: -3px;
+      }
+      .status-text {
+        margin-left: -6px;
       }
     }
 
@@ -532,189 +561,197 @@ mat-card-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.tank-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 11px;
-  font-family: "Roboto";
-  font-weight: 700;
-  line-height: 14px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fff;
-}
-
-.tank-details {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 8px;
-  gap: 40px;
-}
-
-.tank-info {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-.tank-name {
-  color: #414141;
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.tank-type {
-  color: #717171;
-  font-size: 11px;
-  font-weight: 400;
-}
-
-.tank-status {
-  display: flex;
-  text-align: right;
-  font-size: 12px;
-  font-weight: 700;
-  margin: 0 auto;
-}
-
-/* Container for the tank fill */
-.tank-container {
-  position: relative;
-  width: 100%;
-  height: 77px;
-  border-radius: 22px;
-  border: 1px solid #ddd;
-  overflow: hidden;
-  background-color: #fff;
-}
-
-.tank-fill-bar {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  border-radius: 22px 22px 0 0;
-  box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.5);
-}
-
-.wave {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background: #2c74b3;
-  border-radius: 22px 22px 0 0;
-  overflow: hidden;
-}
-
-.tank-text {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  font-size: 11px;
-  font-family: "Roboto";
-  font-weight: 700;
-  color: #ffffff;
-  text-align: center;
-}
-
-/* Color and wave styles based on fill percentage */
-@keyframes small-wave {
-  0% {
-    transform: translateY(0);
+  .tank-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 11px;
+    font-family: "Roboto";
+    font-weight: 700;
+    line-height: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
   }
-  50% {
-    transform: translateY(-10px);
+
+  .tank-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 8px;
+    gap: 40px;
   }
-  100% {
-    transform: translateY(0);
+
+  .tank-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .tank-name {
+    color: #414141;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .tank-type {
+    color: #717171;
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  .tank-status {
+    display: flex;
+    text-align: right;
+    font-size: 10px;
+    font-weight: 700;
+    margin: 0 auto;
+  }
+
+  /* Container for the tank fill */
+  .tank-container {
+    position: relative;
+    width: 100%;
+    height: 77px;
+    border-radius: 22px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  .tank-fill-bar {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    // border-radius: 22px 22px 0 0;
+    // box-shadow: inset 0 0 50px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: #2c74b3;
+    // border-radius: 22px 22px 0 0;
+    overflow: hidden;
+  }
+
+  .tank-text {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    font-size: 10px;
+    font-family: "Roboto";
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+  }
+  .water-text {
+    color: black !important;
+    bottom: 68%;
+  }
+  .low-oil-warning {
+    bottom: 98%;
+  }
+  /* Color and wave styles based on fill percentage */
+  // .tank-stats {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   width: 100%;
+  //   margin-top: 10px;
+  //   .tank-detail {
+  //     text-align: center;
+  //   }
+
+  //   .tank-detail span:first-child {
+  //     font-weight: bold;
+  //   }
+  // }
+
+  .low-alert .tank-status span {
+    color: #00cc44; /* Green */
+  }
+
+  .normal-alert .tank-status span {
+    color: #ffcc00; /* Yellow */
+  }
+
+  .high-alert .tank-status span {
+    color: #ff4d4d; /* Red */
+  }
+
+  /* Container for the tank stats */
+  .tank-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  /* Styling for individual tank-detail containers */
+  .tank-detail {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+
+  /* Styling for header */
+  .tank-detail span:first-child {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    position: relative;
+  }
+
+  /* Styling for value with border */
+  .tank-detail span:last-child {
+    display: block;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Pseudo-element for the dashed line to show continuity */
+  .tank-detail::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-top: 2px dashed #ddd;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  /* Ensure the dashed line appears only between the label and value */
+  .tank-detail span:first-child {
+    margin-bottom: 10px;
   }
 }
 
-.tank-stats {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.tank-detail {
-  text-align: center;
-}
-
-.tank-detail span:first-child {
-  font-weight: bold;
-}
-
-.low-alert .tank-status span {
-  color: #00cc44; /* Green */
-}
-
-.normal-alert .tank-status span {
-  color: #ffcc00; /* Yellow */
-}
-
-.high-alert .tank-status span {
-  color: #ff4d4d; /* Red */
-}
-
-/* Container for the tank stats */
-.tank-stats {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-/* Styling for individual tank-detail containers */
-.tank-detail {
-  flex: 1;
-  text-align: center;
-  position: relative;
-}
-
-/* Styling for header */
-.tank-detail span:first-child {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  position: relative;
-}
-
-/* Styling for value with border */
-.tank-detail span:last-child {
-  display: block;
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  position: relative;
-  z-index: 1;
-}
-
-/* Pseudo-element for the dashed line to show continuity */
-.tank-detail::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  border-top: 2px dashed #ddd;
-  transform: translateY(-50%);
-  z-index: 0;
-}
-
-/* Ensure the dashed line appears only between the label and value */
-.tank-detail span:first-child {
-  margin-bottom: 10px;
-}
 .bottom-content {
   margin-top: auto; /* Align to the left with some padding */
-  padding-left: 16px;
+  padding-left: 12px;
   align-items: end;
+}
+@media (max-width: 768px) {
+  /* You can adjust this breakpoint as needed */
+  .site-info-right {
+    flex-direction: column; /* Change to vertical layout */
+    max-width: 100%; /* Optional: Set max-width to full */
+  }
+}
+@media (max-width: 600px) {
+  /* You can adjust this breakpoint as needed */
+  .site-info-card,
+  .site-info-right {
+    flex-direction: column; /* Change to vertical layout */
+    max-width: 100%; /* Optional: Set max-width to full */
+  }
 }

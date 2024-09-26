@@ -57,6 +57,7 @@ mat-sidenav {
   //   width: 100%;
   // }
 }
+
 /* Desktop specific styles */
 @media (min-width: 1024px) {
   mat-sidenav-container {
@@ -87,7 +88,75 @@ mat-sidenav {
   mat-sidenav {
     width: 100% !important; /* Full-width navbar for tablets */
   }
-  .column-1,.price-status-card {
+  .column-1,
+  .price-status-card {
     flex: 1 1 100%;
+  }
+}
+.site-info-right {
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__notch {
+    border-color: #ddd !important;
+  }
+  .mat-mdc-form-field-infix {
+    padding-top: 6px !important;
+    padding-bottom: 5px !important;
+    min-height: 44px;
+  }
+  // .mat-mdc-icon-button .mat-mdc-button-touch-target {
+  //   height: 25px;
+  // }
+  .mat-mdc-select-value-text {
+    font-size: 12px;
+  }
+  .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label {
+    top: 20px;
+  }
+  /* Global styles or component-specific styles */
+  mat-form-field {
+    height: auto; /* Allow height to auto adjust */
+    min-height: 40px; /* Minimum height */
+  }
+
+  /* Input fields */
+  mat-form-field input.mat-input-element {
+    height: 25px !important; /* Force height */
+    padding: 0 8px !important; /* Adjust padding */
+    font-size: 14px; /* Adjust font size */
+  }
+
+  /* Select dropdown */
+  mat-form-field .mat-select {
+    height: 30px !important; /* Force height */
+  }
+
+  /* Ensuring select dropdown and input fields are aligned */
+  mat-form-field .mat-form-field-wrapper {
+    height: auto; /* Allow height to auto adjust */
+  }
+
+  mat-form-field .mat-form-field-flex {
+    height: auto; /* Allow height to auto adjust */
+  }
+
+  /* Optional: Adjust label styles */
+  mat-label {
+    font-size: 12px; /* Smaller font size */
+    line-height: 30px; /* Center label vertically */
+  }
+
+  /* Optional: Adjust placeholder styles */
+  mat-form-field input::placeholder {
+    font-size: 12px; /* Smaller font size for placeholder */
+  }
+  .mat-mdc-text-field-wrapper {
+    height: 25px !important;
+  }
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    width: 25px;
+    padding: 0;
+    height: 25px;
+    color: #e0e0f9;
   }
 }
