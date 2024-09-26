@@ -1,16 +1,17 @@
- body, html {
-    //height: 100%;
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-  }
+body,
+html {
+  //height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-  .site-info-right {
-    .mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align::before {
-      line-height: 0 !important;
-      display: none;
-    }
-  
+.site-info-right {
+  .mat-mdc-form-field-subscript-wrapper,
+  .mat-mdc-form-field-bottom-align::before {
+    line-height: 0 !important;
+    display: none;
   }
+}
 
 /* Custom scrollbar styling for the entire application */
 ::-webkit-scrollbar {
@@ -38,10 +39,55 @@ mat-card {
 /* Styling for Firefox */
 .scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #81c0ff #f1f1f1; 
+  scrollbar-color: #81c0ff #f1f1f1;
 }
 
 /* Styling for IE and Edge */
 .scrollbar {
   -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+/* Sidenav */
+mat-sidenav {
+  width: 170px !important;
+  z-index: 1000;
+  box-sizing: content-box;
+
+  // /* Full-width sidenav for mobile screens */
+  // @media (max-width: 600px) {
+  //   width: 100%;
+  // }
+}
+/* Desktop specific styles */
+@media (min-width: 1024px) {
+  mat-sidenav-container {
+    flex-direction: row; /* Side-by-side layout for desktop */
+    height: calc(100vh - 56px); /* Full height minus header */
+  }
+}
+/* Media query for tablets (only show icons) */
+@media (max-width: 820px) and (min-width: 600px) {
+  mat-sidenav {
+    width: 52px !important; /* Full-width navbar for tablets */
+  }
+  .price-status-card {
+    flex: 1 1 70%;
+  }
+}
+
+/* Media query for mobile devices (show full menu) */
+@media (max-width: 600px) {
+  mat-sidenav {
+    width: 100% !important; /* Full-width navbar for tablets */
+  }
+  .price-status-card {
+    flex: 1 1 80%;
+  }
+}
+@media (max-width: 400px) {
+  mat-sidenav {
+    width: 100% !important; /* Full-width navbar for tablets */
+  }
+  .column-1,.price-status-card {
+    flex: 1 1 100%;
+  }
 }

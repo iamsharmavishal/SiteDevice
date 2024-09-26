@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -25,16 +25,23 @@ interface MenuItem {
 })
 export class NavbarComponent {
   @Input() isNavbarOpen = false;
+  @Input() isMobileView = false; // Add this line
+  @Output() itemClicked = new EventEmitter<void>(); // Event emitter for item click
+
+  
   menuItems: MenuItem[] = [
    // { label: 'Home', route: '/home' },
     { label: 'Site Details', route: '/site-detail', icon: 'home' },
     { label: 'Device Grid', route: '/device-grid', icon: 'info' },
-    { label: 'Device Grid Expanded', route: '/device-grid-expanded' }
+    { label: 'Device Grid Expanded', route: '/device-grid-expanded', icon: 'info' }
   ];
 
   constructor(private router: Router) {}
 
   navigateTo(route: string) {
     this.router.navigate([route]);
+  }
+  onItemClicked() {
+    this.itemClicked.emit(); // Emit the event when an item is clicked
   }
 }

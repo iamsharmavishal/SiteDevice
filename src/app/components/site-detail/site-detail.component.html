@@ -98,7 +98,7 @@
           <div class="header-content">
             <div class="header-title">{{ card.title }}</div>
             <div class="header-subtitle">
-              <mat-icon>watch_later</mat-icon> Last updated: {{ card.lastUpdated }}
+              <mat-icon>watch_later</mat-icon><span> Last updated: {{ card.lastUpdated }}</span>
             </div>
           </div>
         </mat-card-header>
@@ -126,7 +126,7 @@
   </div>
   <!-- pump status Container HTML -->
   <div class="dynamic-cards-container">
-    <mat-card *ngFor="let card of dynamicPumpStatusCards" [ngClass]="getCardBackgroundColor(card.printerStatus)">
+    <mat-card *ngFor="let card of dynamicPumpStatusCards" [ngClass]="getCardBackgroundColor(card.status)">
       <div class="card-content">
         <div class="card-details">
           <h3 class="card-title">{{ card.title }}</h3>
@@ -138,7 +138,7 @@
         </div>
       </div>
     </mat-card>
-  </div>
+  </div>  
   <!-- tank status  Container HTML -->
   <!-- Parent Container for All Tank Cards -->
   <div class="tank-cards-container">
