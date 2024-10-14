@@ -1,0 +1,139 @@
+.header {
+    background-color: #2196f3; /* Header color */
+    color: white; /* Text color for header */
+    padding: 10px; /* Padding for the header */
+    font-size: 1.5em; /* Font size for header */
+    text-align: center; /* Center align the header text */
+  }
+  
+  .close-button {
+    position: absolute; /* Position the close button in the top right corner */
+    top: 2px; /* Distance from the top */
+    right: 0px; /* Distance from the right */
+  }
+  
+  .dialog-content {
+    padding: 20px; /* Add padding around content */
+    max-height: 70vh; /* Set a maximum height to allow scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+  }
+  
+  .form-field {
+    margin-bottom: 20px; /* Space between form fields */
+  }
+  
+  .slider-value {
+    margin-top: 10px; /* Space above the slider value */
+    font-weight: bold; /* Bold text for the value */
+    color: #2196f3; /* Match color with header for consistency */
+    text-align: center; /* Center align the value text */
+  }
+  
+  .action-buttons {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-start; /* Align buttons to the left */
+    margin-top: 20px; /* Space above buttons */
+  }
+  
+  .create-alert {
+    color: red; /* Red color for Create Alert */
+    font-size: 1em; /* Font size for Create Alert link */
+    text-decoration: underline; /* Underline to make it look like a link */
+    padding: 10px 20px; /* Add padding for a button-like appearance */
+    margin-right: 10px; /* Space between Create Alert and Resolve Alert */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .create-alert:hover {
+    color: rgba(255, 0, 0, 0.8); /* Change color on hover */
+  }
+  
+  .resolve-alert {
+    color: green; /* Green color for Resolve Alert */
+    font-size: 1em; /* Font size for Resolve Alert link */
+    text-decoration: underline; /* Underline to make it look like a link */
+    padding: 10px 20px; /* Add padding for a button-like appearance */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .resolve-alert:hover {
+    color: rgba(0, 128, 0, 0.8); /* Change color on hover */
+  }
+  
+  .dialog-footer {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align footer items to the right */
+    padding: 10px; /* Padding around footer */
+    background-color: #f5f5f5; /* Optional background color */
+  }
+  
+  .close-footer {
+    margin-left: auto; /* Push close button to the right */
+  }
+  
+  .success-snackbar {
+    background-color: green; /* Background color for success snackbar */
+    color: white; /* Text color for snackbar */
+  }
+  
+  .error-snackbar {
+    background-color: red; /* Background color for error snackbar */
+    color: white; /* Text color for snackbar */
+  }
+  
+  @media (max-width: 600px) {
+    .header {
+      font-size: 1.2em; /* Smaller font size for smaller screens */
+      padding: 8px; /* Reduced padding */
+    }
+  
+    .close-button {
+      top: 2px; /* Adjust position */
+      right: 0px; /* Adjust position */
+    }
+  
+    .action-buttons {
+      flex-direction: column; /* Stack buttons vertically on small screens */
+      align-items: flex-start; /* Align buttons to the left */
+      width: 100%; /* Full width */
+    }
+  
+    .create-alert,
+    .resolve-alert {
+      width: 100%; /* Full width for buttons on small screens */
+      margin-bottom: 10px; /* Space between stacked buttons */
+    }
+  
+    .dialog-footer {
+      flex-direction: column; /* Stack footer elements vertically on small screens */
+      align-items: center; /* Center footer content */
+    }
+  }
+  .create-alert-button {
+    margin-bottom: 20px;
+    background-color: #2196f3;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+  
+  .alert-grid {
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  

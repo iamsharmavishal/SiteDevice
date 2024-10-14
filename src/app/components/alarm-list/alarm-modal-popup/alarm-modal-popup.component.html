@@ -1,0 +1,30 @@
+<h2 mat-dialog-title class="header">{{ title }}</h2>
+<button mat-icon-button (click)="onClose()" class="close-button">
+  <mat-icon>close</mat-icon>
+</button>
+
+<div mat-dialog-content class="dialog-content">
+  <form>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Site ID</mat-label>
+      <input matInput placeholder="Enter Site ID" [(ngModel)]="siteId" name="siteId" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Alert Type</mat-label>
+      <mat-select [(ngModel)]="alertType" name="alertType" required>
+        <mat-option *ngFor="let type of alertTypes" [value]="type.value">{{ type.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Alert Level (0 to 5)</mat-label>
+      <input matInput type="number" min="0" max="5" [(ngModel)]="alertLevel" name="alertLevel" required>
+    </mat-form-field>
+
+    <div class="action-buttons">
+      <button mat-button (click)="onSubmit('create')" *ngIf="!isResolveAlarm" class="create-alert">Create Alarm</button>
+      <button mat-button (click)="onSubmit('resolve')" *ngIf="isResolveAlarm" class="resolve-alert">Resolve Alarm</button>
+    </div>
+  </form>
+</div>

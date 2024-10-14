@@ -33,7 +33,7 @@ export class NavbarComponent {
    // { label: 'Home', route: '/home' },
     { label: 'Dashboard', route: '/site-detail', icon: 'dashboard_2' },
     { label: 'Situations', route: '/device-grid', icon: 'folder' },
-    { label: 'Alerts', route: '/site-detail', icon: 'notifications' },
+    { label: 'Alerts', route: '/alerts', icon: 'notifications' },
     { label: 'Events', route: '/site-detail', icon: 'event' },
     { label: 'Policy', route: '/site-detail', icon: 'policy' }
   ];

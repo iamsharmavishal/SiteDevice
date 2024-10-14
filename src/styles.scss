@@ -48,7 +48,7 @@ mat-card {
 }
 /* Sidenav */
 mat-sidenav {
-  width: 170px !important;
+  width: 100px !important;
   z-index: 1000;
   box-sizing: content-box;
 
@@ -158,5 +158,14 @@ mat-sidenav {
     padding: 0;
     height: 25px;
     color: #e0e0f9;
+  }
+}
+.alarm-paginator {
+  .mat-mdc-paginator-container {
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .mat-mdc-paginator-range-actions {
+    height: 35px !important;
   }
 }

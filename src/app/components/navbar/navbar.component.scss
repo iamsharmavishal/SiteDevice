@@ -39,19 +39,19 @@ li {
   align-items: center;
   cursor: pointer;
   color: #717171;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 600;
   transition: background-color 0.3s;
-
+  /* Icon styling */
+  mat-icon {
+    margin-right: 2px;
+    font-size: 20px;
+    height: 20px !important;
+    width: 20px !important;
+  }
   &:hover {
     background-color: #e0e0e0;
   }
-}
-
-/* Icon styling */
-mat-icon {
-  margin-right: 8px;
-  font-size: 24px;
 }
 
 /* Link styling */
@@ -70,18 +70,16 @@ a {
     li {
       justify-content: center; /* Center the icons */
     }
-  
+
     mat-icon {
       margin-right: 0; /* Remove the margin on the icons */
     }
-  
+
     /* Hide the labels on tablets */
     li span {
       display: none;
     }
   }
-
- 
 }
 
 /* Media query for mobile devices (show full menu) */
@@ -91,16 +89,14 @@ a {
     li {
       justify-content: flex-start; /* Show icons and labels */
     }
-  
+
     mat-icon {
       margin-right: 8px; /* Icons with labels on mobile */
     }
-  
+
     /* Show the full label text on mobile */
     li span {
       display: inline-block;
     }
   }
-
- 
 }
