@@ -60,7 +60,7 @@ export class AlarmListComponent implements OnInit {
     }
     
     const dialogRef = this.dialog.open(AlarmModalPopupComponent, {
-      width: '400px',
+      //width: '400px',
       data: alarm ? { ...alarm } : { siteId: '', alertType: '', alertLevel: 0, title:  'Create Alarm' }
     });
   

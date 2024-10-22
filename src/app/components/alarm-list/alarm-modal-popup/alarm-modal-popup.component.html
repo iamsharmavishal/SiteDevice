@@ -4,7 +4,7 @@
 </button>
 
 <div mat-dialog-content class="dialog-content">
-  <form>
+  <form class="modal-form">
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Site ID</mat-label>
       <input matInput placeholder="Enter Site ID" [(ngModel)]="siteId" name="siteId" required>
@@ -22,9 +22,10 @@
       <input matInput type="number" min="0" max="5" [(ngModel)]="alertLevel" name="alertLevel" required>
     </mat-form-field>
 
-    <div class="action-buttons">
-      <button mat-button (click)="onSubmit('create')" *ngIf="!isResolveAlarm" class="create-alert">Create Alarm</button>
-      <button mat-button (click)="onSubmit('resolve')" *ngIf="isResolveAlarm" class="resolve-alert">Resolve Alarm</button>
-    </div>
+    
   </form>
+  <div class="action-buttons">
+    <button mat-button (click)="onSubmit('create')" *ngIf="!isResolveAlarm" class="create-alert-button">Create Alarm</button>
+    <button mat-button (click)="onSubmit('resolve')" *ngIf="isResolveAlarm" class="resolve-alert">Resolve Alarm</button>
+  </div>
 </div>

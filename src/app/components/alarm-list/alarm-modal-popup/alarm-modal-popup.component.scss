@@ -1,25 +1,36 @@
 .header {
     background-color: #2196f3; /* Header color */
     color: white; /* Text color for header */
-    padding: 10px; /* Padding for the header */
-    font-size: 1.5em; /* Font size for header */
+    padding: 5px; /* Padding for the header */
+    font-size: 1em; /* Font size for header */
     text-align: center; /* Center align the header text */
   }
   
   .close-button {
     position: absolute; /* Position the close button in the top right corner */
-    top: 2px; /* Distance from the top */
+    top: 0px; /* Distance from the top */
     right: 0px; /* Distance from the right */
+    
   }
-  
+  .close-button.mat-mdc-icon-button.mat-mdc-button-base {
+    padding: 8px !important;
+    width: 40px;
+    height: 40px;
+    margin-right: 4px;
+  }
   .dialog-content {
-    padding: 20px; /* Add padding around content */
-    max-height: 70vh; /* Set a maximum height to allow scrolling */
+    padding: 6px 14px; /* Add padding around content */
+    //max-height: 70vh; /* Set a maximum height to allow scrolling */
     overflow-y: auto; /* Allow vertical scrolling */
   }
   
   .form-field {
-    margin-bottom: 20px; /* Space between form fields */
+    padding: 0 4px; /* Space between form fields */
+  }
+  .modal-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
   
   .slider-value {
@@ -32,20 +43,6 @@
   .action-buttons {
     display: flex; /* Use flexbox for alignment */
     justify-content: flex-start; /* Align buttons to the left */
-    margin-top: 20px; /* Space above buttons */
-  }
-  
-  .create-alert {
-    color: red; /* Red color for Create Alert */
-    font-size: 1em; /* Font size for Create Alert link */
-    text-decoration: underline; /* Underline to make it look like a link */
-    padding: 10px 20px; /* Add padding for a button-like appearance */
-    margin-right: 10px; /* Space between Create Alert and Resolve Alert */
-    transition: color 0.3s; /* Smooth transition for hover effect */
-  }
-  
-  .create-alert:hover {
-    color: rgba(255, 0, 0, 0.8); /* Change color on hover */
   }
   
   .resolve-alert {
@@ -110,12 +107,13 @@
     }
   }
   .create-alert-button {
-    margin-bottom: 20px;
-    background-color: #2196f3;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    text-transform: uppercase;
+    background: #fb7a7a;
+    color: white !important;
+    font-size: 11px;
+    &:hover{
+      background: #fbbcbc;
+      color: #222222 !important;
+    }
   }
   
   .alert-grid {
